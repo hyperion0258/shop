@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 function App() {
   return (
@@ -17,6 +19,19 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+      <div className="main-bg"></div>
+
+      <Container>
+      <Row>
+        <Col>상품명</Col>
+        <Col>상품명</Col>
+      </Row>
+      <Row>
+        <Col>상품명</Col>
+        <Col>상품명</Col>
+        <Col>상품명</Col>
+      </Row>
+    </Container>
     </div>
   );
 }
