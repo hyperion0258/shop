@@ -5,8 +5,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useState } from 'react';
+import data from './data.js';
 
 function App() {
+
+  let [shoes, setShoes] = useState(data)
+
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
@@ -19,21 +24,36 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-      <div className="main-bg"></div>
-
+      <div className="main-bg" />
       <Container>
-      <Row>
-        <Col>상품명</Col>
-        <Col>상품명</Col>
-      </Row>
-      <Row>
-        <Col>상품명</Col>
-        <Col>상품명</Col>
-        <Col>상품명</Col>
-      </Row>
-    </Container>
+        <Row>
+          {
+            shoes.map((a, i) => {
+              return (
+                <Goods shoes={shoes[i]} i={i}></Goods>
+              )
+            })
+          }
+        </Row>
+      </Container>
     </div>
   );
 }
+
+function Goods(props) {
+  return (
+    <Col md="4">
+      <img src={'https://codingapple1.github.io/shop/shoes' + (props.i + 1) + '.jpg'} width="80%"></img>
+      <h4>{props.shoes.title}</h4>
+      <p>{props.shoes.price}</p>
+    </Col>
+  )
+}
+
+
+
+
+
+
 
 export default App;
