@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
 import data from './data.js';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
 function App() {
 
@@ -24,6 +25,15 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+      <Router>
+        <Link to="/">홈</Link>
+        <Link to="/detail">상세페이지</Link>
+        <Routes>
+          <Route path='/' element={<div>메인페이지임</div>} />
+          <Route path='/detail' element={<div>상세페이지임</div>} />
+        </Routes>
+      </Router>
+
       <div className="main-bg" />
       <Container>
         <Row>
