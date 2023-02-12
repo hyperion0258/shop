@@ -7,11 +7,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
 import data from './data.js';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import Detail from './routes/Detail.js';
 
 function App() {
 
   let [shoes, setShoes] = useState(data)
+  let navigate = useNavigate();
 
   return (
     <div className="App">
@@ -19,20 +21,24 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/') }}>Home</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/detail') }}>Detail</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
-      <Router>
-        <Link to="/">홈</Link>
-        <Link to="/detail">상세페이지</Link>
-        <Routes>
-          <Route path='/' element={<div>메인페이지임</div>} />
-          <Route path='/detail' element={<div>상세페이지임</div>} />
-        </Routes>
-      </Router>
+
+      <Link to="/">홈</Link>
+      <Link to="/detail">상세페이지</Link>
+      <Routes>
+        <Route path='/' element={<div>메인페이지임</div>} />
+        <Route path='/detail' element={<Detail />} />
+        <Route path='*' element={<div>없는페이지임</div>} />
+        <Route path='/about' element={<About></About>}>
+          <Route path='member' element={<div>멤버임</div>} />
+          <Route path='location' element={<div>위치정보임</div>} />
+        </Route>
+      </Routes>
+
 
       <div className="main-bg" />
       <Container>
@@ -57,6 +63,15 @@ function Goods(props) {
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.price}</p>
     </Col>
+  )
+}
+
+function About() {
+  return (
+    <div>
+      <h4>회사정보임</h4>
+      <Outlet></Outlet>
+    </div>
   )
 }
 
