@@ -12,7 +12,7 @@ import Detail from './routes/Detail.js';
 
 function App() {
 
-  let [shoes, setShoes] = useState(data)
+  let [shoes] = useState(data)
   let navigate = useNavigate();
 
   return (
@@ -31,7 +31,7 @@ function App() {
       <Link to="/detail">상세페이지</Link>
       <Routes>
         <Route path='/' element={<div>메인페이지임</div>} />
-        <Route path='/detail' element={<Detail />} />
+        <Route path='/detail/:id' element={<Detail shoes={shoes}/>} />
         <Route path='*' element={<div>없는페이지임</div>} />
         <Route path='/about' element={<About></About>}>
           <Route path='member' element={<div>멤버임</div>} />
