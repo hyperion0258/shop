@@ -27,31 +27,38 @@ function App() {
         </Container>
       </Navbar>
 
-      <Link to="/">홈</Link>
-      <Link to="/detail">상세페이지</Link>
+
+
       <Routes>
-        <Route path='/' element={<div>메인페이지임</div>} />
-        <Route path='/detail/:id' element={<Detail shoes={shoes}/>} />
-        <Route path='*' element={<div>없는페이지임</div>} />
+        <Route path='/' element={
+          <>
+            <div className="main-bg" />
+            <Container>
+              <Row>
+                {
+                  shoes.map((a, i) => {
+                    return (
+                      <Goods shoes={shoes[i]} i={i}></Goods>
+                    )
+                  })
+                }
+              </Row>
+            </Container>
+          </>
+        } />
+        <Route path='/detail/:id' element={<Detail shoes={shoes} />} />
         <Route path='/about' element={<About></About>}>
           <Route path='member' element={<div>멤버임</div>} />
           <Route path='location' element={<div>위치정보임</div>} />
         </Route>
+        <Route path='/event' element={<Event shoes={shoes}></Event>}>
+          <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>} />
+          <Route path='two' element={<div>생일기념 쿠폰받기</div>} />
+          <Route path='*' element={<div>없는페이지임</div>} />
+        </Route>
       </Routes>
 
 
-      <div className="main-bg" />
-      <Container>
-        <Row>
-          {
-            shoes.map((a, i) => {
-              return (
-                <Goods shoes={shoes[i]} i={i}></Goods>
-              )
-            })
-          }
-        </Row>
-      </Container>
     </div>
   );
 }
@@ -70,6 +77,15 @@ function About() {
   return (
     <div>
       <h4>회사정보임</h4>
+      <Outlet></Outlet> /* 구멍, nested route를 보여줄 자리 **/
+    </div>
+  )
+}
+
+function Event() {
+  return (
+    <div>
+      <h4>오늘의 이벤트</h4>
       <Outlet></Outlet>
     </div>
   )
